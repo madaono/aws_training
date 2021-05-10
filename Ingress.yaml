@@ -5,8 +5,12 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  tls:
+  - hosts:
+      - local.my-app.com
   rules:
-  - http:
+  - host: local.my-app.com
+    http:
       paths:
       - path: /
         pathType: Prefix
@@ -15,3 +19,13 @@ spec:
             name: my-app-service
             port:
               number: 80
+# spec:
+#   rules:
+#   - host: local.my-app.com
+#     http:
+#       paths:
+#       - backend:
+#           serviceName: my-app-service
+#           servicePort: 80
+#         path: /
+#         pathType: Prefix
